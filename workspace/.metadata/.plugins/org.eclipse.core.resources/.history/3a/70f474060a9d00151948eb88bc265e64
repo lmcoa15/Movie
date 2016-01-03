@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
+ <jsp:useBean id="user_membership" class="movie.admin.MembershipBean" scope="page" />
+ <jsp:setProperty name="user_membership" property="*" />
+ 
+
+ 
+ <%
+
+ 	if(user_membership.checkAdmin()){
+ 		pageContext.forward("user_list?action=list");
+
+ 	}
+ 	else{
+ 		pageContext.forward("admin_login.jsp");
+ 	}
+ %> 
+ 

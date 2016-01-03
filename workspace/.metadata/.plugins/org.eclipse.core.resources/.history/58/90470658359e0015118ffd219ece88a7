@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+    import="movie.admin.*" import="java.util.*" %>
+    
+ <jsp:useBean id="gb" scope="page" class="movie.admin.film_reservationBean" />
+<jsp:useBean id="datas" scope="request" class="java.util.ArrayList" />
+<jsp:setProperty name="datas" property="*" />
+
+<%
+	
+
+%>
+
+<%-- <%
+	
+	int seat_id=Integer.parseInt(films_id);
+
+	
+// else if(action.equals("confirm")){
+	 if(gb.confirmDB(seat_id)){
+		seat_no _seat_nos=new seat_no();
+		
+		if(gb.insertDB(_seat_nos,seat_id)){
+			System.out.println("seat db 생성");
+			request.setAttribute("datas",_seat_nos);
+ 			//response.sendRedirect("user_reservation.jsp");
+			response.sendRedirect("film_reservation_control.jsp");
+ 		}
+ 		else
+ 			throw new Exception("DB 입력 오류");
+		
+	}
+	else{	//존재 한다면 해당 id에 맞는 좌석을 보여준다.
+		seat_no _seat_nos=gb.getDB(seat_id);
+			request.setAttribute("datas",_seat_nos);
+			pageContext.forward("film_reservation_control.jsp");
+	} 
+%> --%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

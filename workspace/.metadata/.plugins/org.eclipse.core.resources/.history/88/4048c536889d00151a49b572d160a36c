@@ -1,0 +1,49 @@
+package movie.admin;
+
+public class MembershipBean {
+
+	public String getId_mem() {
+		return id_mem;
+	}
+	public void setId_mem(String id_mem) {
+		this.id_mem = id_mem;
+	}
+	public int getPassword() {
+		return password;
+	}
+	public void setPassword(int password) {
+		this.password = password;
+	}
+	public int getPassword_confirm() {
+		return password_confirm;
+	}
+	public void setPassword_confirm(int password_confirm) {
+		this.password_confirm = password_confirm;
+	}
+	public int getAge_mem() {
+		return age_mem;
+	}
+	public void setAge_mem(int age_mem) {
+		this.age_mem = age_mem;
+	}
+	public String getRdate() {
+		return rdate;
+	}
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
+	}
+	private String id_mem;
+	private int password;
+	private int password_confirm;
+	private int age_mem;
+	private String rdate;
+	public boolean checkPassword(){
+		if(password!=password_confirm){
+			return true; //비밀번호와 비밀번호의 확인이 일
+		}
+		else{
+			System.out.println("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			return false;
+		}
+	}
+}

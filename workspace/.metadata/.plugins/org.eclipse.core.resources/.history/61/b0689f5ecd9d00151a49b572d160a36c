@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="movie.admin.*"
+    import="java.util.*" pageEncoding="UTF-8"%>
+  
+ <%request.setCharacterEncoding("utf-8"); %>
+ <jsp:useBean id="gb" scope="page" class="movie.admin.seat_noBean" />
+  <jsp:useBean id="_seat_no"  class="movie.admin.seat_no" />
+ <jsp:setProperty name="_seat_no" property="*" /> 
+ 
+
+ <%
+ 
+ 	//String films_id=request.getParameter("films_id");
+	//int seat_id=Integer.getInteger(films_id);
+	
+	//System.out.println("seat_no 으로 값전달");
+	//System.out.println(seat_id);
+	System.out.println(_seat_no.getId_film());
+	int seat_id=_seat_no.getId_film();
+ 	//String action=request.getParameter("action");
+ 	
+	
+	
+	//else if(action.equals("confirm")){
+		if(gb.confirmDB(seat_id)){
+			seat_no _seat_nos=new seat_no();
+			
+			if(gb.insertDB(_seat_nos)){
+				request.setAttribute("datas",_seat_nos);
+	 			response.sendRedirect("user_reservation.jsp");
+	 		}
+	 		else
+	 			throw new Exception("DB 입력 오류");
+			
+		}
+		else{	//존재 한다면 해당 id에 맞는 좌석을 보여준다.
+			seat_no _seat_nos=gb.getDB(seat_id);
+ 			request.setAttribute("datas",_seat_nos);
+ 			pageContext.forward("user_reservation.jsp");
+		}
+ 	//}
+ %>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

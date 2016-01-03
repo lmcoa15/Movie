@@ -1,0 +1,45 @@
+package movie.admin;
+
+public class LoginBean {
+
+	private String admin_id;
+	private String admin_passwd;
+	
+	final String _admin_id="admin";
+	final String _admin_passwd="admin";
+	
+	public boolean checkAdmin(){
+		System.out.println("");
+		if(admin_id.equals(_admin_id)&&admin_passwd.equals(_admin_passwd)){
+			
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public String getAdmin_id() {
+		return admin_id;
+	}
+
+	public void setAdmin_id(String admin_id) {
+		this.admin_id = admin_id;
+	}
+
+	public String getAdmin_passwd() {
+		return admin_passwd;
+	}
+
+	public void setAdmin_passwd(String admin_passwd) {
+		this.admin_passwd = admin_passwd;
+	}
+
+	public String get_admin_id() {
+		return _admin_id;
+	}
+
+	public String get_admin_passwd() {
+		return _admin_passwd;
+	}
+}

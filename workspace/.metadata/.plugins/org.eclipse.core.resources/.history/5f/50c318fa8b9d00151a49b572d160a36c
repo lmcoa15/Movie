@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
+ <jsp:useBean id="user_membership" class="movie.admin.MembershipBean" scope="page" />
+ <jsp:setProperty name="user_membership" property="*" />
+ 
+
+ 
+ <%
+
+ 	if(user_membership.checkPassword()){
+ 		//먼저 기존에 데이터베이스를 연결하여 기존 아이디와 일치하는 것 있는지 확인한다.
+ 		
+ 		//위에서 일치하는 것 없는것 확인되면 이부분에서 회원 계정 생성한다.
+ 		pageContext.forward("user_list?action=list");
+
+ 	}
+ 	else{
+ 		//System.out.println("회원가입 실패!");
+ 		pageContext.forward("user_membership.jsp");
+ 	}
+ %> 
+ 

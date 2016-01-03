@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
+ <jsp:useBean id="admin_login" class="movie.admin.LoginBean" scope="page" />
+ <jsp:setProperty name="admin_login" property="*" />
+ 
+
+ 
+ <%
+
+ 	if(!admin_login.checkAdmin()){
+	out.println("로그인 실패!");
+ 		//pageContext.forward("admin_mode.jsp");
+ 		//response.sendRedirect("admin_mode.jsp");
+ 		
+ 		
+ 	}
+ 	//else{
+ 		out.println("로그인 성공!");
+ 		//pageContext.forward("admin_login.jsp");
+ 		//response.sendRedirect("admin_login.jsp");
+ 	//}
+ %> 
+ 
+<%-- <jsp:forward page="admin_mode.jsp"></jsp:forward> --%>

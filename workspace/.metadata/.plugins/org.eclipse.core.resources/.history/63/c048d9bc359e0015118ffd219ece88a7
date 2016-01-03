@@ -1,0 +1,111 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+    import="movie.admin.*" import="java.util.*"%>
+    
+ <jsp:useBean id="gb" scope="page" class="movie.admin.MembershipBean" />
+ <jsp:useBean id="_membership"  class="movie.admin.membership" />
+ <jsp:setProperty name="_membership" property="*" />
+
+<% 
+	String action=request.getParameter("action");
+	String films_id=request.getParameter("films_id");
+	
+	//로그인시 
+	if(action.equals("login")){ 
+		
+		membership memberships=gb.getDB(_membership.getName_mem());
+		String pass_word=memberships.getPassword();
+		
+		//입력 정보 확인
+		if(_membership.getName_mem()!= null && _membership.getPassword()!=null){
+			//회원 정보 확인
+			if(!gb.confirmDB(_membership.getName_mem())){
+				
+					if(pass_word.equals(_membership.getPassword())){
+						/* request.setAttribute("action","confim"); */
+						
+						pageContext.forward("seat_no_control.jsp?films_id="+films_id+" user_id="+_membership.getName_mem());
+					}else{
+						System.out.println("회원 정보가 일치하지 않습니다.");
+						
+						pageContext.forward("user_login.jsp");
+						}
+			}
+			else{
+					System.out.println("회원 가입이 되어 있지 않습니다.");
+					pageContext.forward("user_login.jsp");
+				}
+		}
+		else{
+			System.out.println("회원정보를 모두 입력하지 않았습니다.");
+			pageContext.forward("user_login.jsp");
+		}
+	}
+	
+	//회원가입시
+	else if(action.equals("confirm"))
+	{ 
+		System.out.println("confirm 입장");
+		String password_confirm=request.getParameter("password_confirm");
+		
+		//id,비밀번호, 나이 미기입시 오류처리
+		if(_membership.getAge_mem()!=0 && _membership.getName_mem()!=null & _membership.getPassword()!=null){
+			
+			//비밀번호 더블 체크
+			if(password_confirm.equals(_membership.getPassword())){
+				
+				//아이디 중복 체크
+				if(gb.confirmDB(_membership.getName_mem())){
+					if(gb.insertDB(_membership)){
+						System.out.println("회원가입 성공");
+						response.sendRedirect("film_control.jsp?action=list");
+						}else
+	 						throw new Exception("DB 입력 오류");
+				}
+				else{
+					System.out.println("중복되는 아이디가 존재합니다.");
+					pageContext.forward("user_membership.jsp");
+				}
+			}
+			else{
+					System.out.println("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+					pageContext.forward("user_membership.jsp");	
+				}
+			
+				}
+		else{
+					System.out.println("정보를 모두 입력하지 않았습니다.");
+					pageContext.forward("user_membership.jsp");
+			}
+	}
+	
+	//회원가입 비밀번호 확인후 새롭게 생성
+ 	else if(action.equals("insert")){ 
+ 		System.out.println("insert 입장");
+
+ 		if(gb.insertDB(_membership)){
+ 			response.sendRedirect("user_reservation.jsp");
+ 		}
+ 		else
+ 			throw new Exception("DB 입력 오류");
+ 	}
+ 	else if(action.equals("delete")){
+
+ 		if(gb.deleteDB(_membership.getId_mem())){
+ 			//response.sendRedirect("film_control.jsp?action=list");
+ 		}else
+ 			throw new Exception("DB 삭제 오류");
+ 	}
+	
+	//else if(action.equals("update")){
+	 	//}
+ %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
